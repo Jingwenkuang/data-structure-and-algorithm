@@ -21,3 +21,44 @@ c.next = d;
 insertNode(a, 'x', 2);
 // a -> b -> x -> c -> d
  */
+
+const insertNode = (head, value, index) => {
+  let current = head; 
+  let newNode = new Node(value);
+
+  if (index === 0){
+    newNode.next = head.next;
+    return newNode; 
+  }
+
+  let count = 0; 
+  while (current !== null){
+    if (count === index -1){
+      let temp = current.next; 
+      current.next = newNode;  
+      newNode.next = temp; 
+    }
+    current = current.next; 
+    count ++;
+  }
+  return head; 
+}
+
+//recursive time o(n), space o(n)
+const insertNode = (head, value, index, count = 0) => {
+  let newNode = new Node(value);
+  if (index === 0){
+    newNode.next = head; 
+    return newNode; 
+  }
+
+  if (count === index -1) {
+    let temp = head.next; 
+    head.next = newNode; 
+    newNode.next = temp;
+    return head;
+  }
+
+  insertNode(head.next, value, index, count + 1);
+  return head; 
+}
