@@ -53,6 +53,8 @@ class Node {
 //   return null;
 // };
 
+
+//dfs using reverse time o(n), space o(n)
 const pathFinderHelper = (root, target) => {
   if (root === null) return null; 
   if (root.val === target) return [root.val];
