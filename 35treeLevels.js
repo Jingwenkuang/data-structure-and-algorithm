@@ -38,9 +38,66 @@ class Node {
   }
 }
 
+//dfs time o(n), space o(n)
 const treeLevels = (root) => {
-  // todo
+  if(root === null) return [];
+  const levels = [];
+  const stack = [{node: root, levelNum: 0}];
+  
+
+  while (stack.length > 0) {
+    const {node, levelNum} = stack.pop();
+    if (levels.length === levelNum) {
+      levels[levelNum] = [node.val]
+    } else {
+      levels[levelNum].push(node.val)
+    }
+    console.log('stack', stack)
+    if (node.right !== null) stack.push({node: node.right, levelNum: levelNum + 1});
+    if (node.left !== null) stack.push({node: node.left, levelNum: levelNum + 1});
+  }
+  return levels;
 };
+
+
+//dfs recrusive time o(n), space o(n)
+
+const treeLevels = (root) => {
+  const levels = [];
+  _treeLevels(root, levels, 0)
+  return levels; 
+}
+
+const _treeLevels = (root, levels, levelNum) => {
+  if (root === null) return; 
+  if (levels.length === levelNum){
+    levels[levelNum] = [root.val];
+  } else {
+    levels[levelNum].push(root.val)
+  }
+  _treeLevels(root.left, levels, levelNum+1);
+  _treeLevels(root.right, levels, levelNum+1);
+}
+
+//bfs time o(n^2), space o(n)
+// const treeLevels = (root) => {
+//   if (root === null) return [];
+//   const levels = [];
+//   const queue = [{node: root, levelNum: 0}];
+  
+//   while (queue.length > 0) {
+//     let {node, levelNum} = queue.shift();
+//     if (levels.length === levelNum){
+//       levels[levelNum] = [node.val];
+//     } else {
+//       levels[levelNum].push(node.val);
+//     }
+//     if (node.left !== null) queue.push({node: node.left, levelNum: levelNum + 1});
+//     if (node.right !== null) queue.push({node: node.right, levelNum: levelNum + 1});
+                                       
+//   }
+//   return levels;
+// }
 
 const a = new Node("a");
 const b = new Node("b");
