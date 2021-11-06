@@ -18,6 +18,7 @@ const grid = [
 islandCount(grid); // -> 3
  */
 
+//dfs time o(rowcol), space o(rowcol)
 const islandCount = (grid) => {
   let row = grid.length;   
   let col = grid[0].length; 
